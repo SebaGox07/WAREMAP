@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>WAREMAP | Mapa de racks</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="importmap">
+  {"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"}}
+  </script>
+</head>
+<body>
+<div class="app">
+  <header class="header">
+    <div class="brand"><img class="brand-icon" src="assets/logo-waremap.png" alt="Icono WAREMAP"><img class="brand-title" src="assets/titulo-waremap.png" alt="WAREMAP - Mapa de racks y ubicaciones"></div>
+    <div class="header-actions"><div class="view-switch" role="group" aria-label="Modo de visualización">
+          <button id="view3d" class="active" type="button" aria-pressed="true">Vista 3D</button>
+          <button id="view2d" type="button" aria-pressed="false">Mapa plano 2D</button>
+        </div><div class="header-status"><span class="dot"></span> Conectando...</div></div>
+  </header>
+  <main class="workspace">
+    <section class="map-section">
+      <div class="toolbar">
+        <div><h2>Mapa general de bodega</h2><p>5 racks · 7 posiciones × 3 niveles · 105 ubicaciones</p></div>
+      </div>
+      <div class="search-area">
+        <label for="searchInput">Buscar ubicaciones y productos</label>
+        <div class="search-line"><input id="searchInput" type="search" placeholder="Ej.: R01-N2-P04, FIL-001, etiqueta merkén, film canela..." autocomplete="off"><button id="clearSearch" type="button">Limpiar</button></div>
+        <div id="searchStatus" class="search-status" role="status">Busca por producto, SKU, posición, rack o nivel.</div>
+        <div id="searchResults" class="search-results" hidden></div>
+      </div>
+      <div class="scene-wrapper" id="viewContainer">
+        <div id="scene3d" aria-label="Bodega tridimensional interactiva"></div>
+        <div id="map2d" hidden aria-label="Mapa plano de racks"></div>
+        <div id="sceneLabel" class="scene-label">BODEGA · VISTA 3D</div>
+        <div id="zoom2dControls" class="zoom2d-controls" hidden aria-label="Controles de zoom del mapa 2D">
+          <button id="zoom2dOut" type="button" aria-label="Alejar mapa" title="Alejar">−</button>
+          <span id="zoom2dValue" aria-live="polite">100%</span>
+          <button id="zoom2dIn" type="button" aria-label="Acercar mapa" title="Acercar">+</button>
+          <button id="zoom2dReset" type="button" title="Restablecer zoom">Restablecer</button>
+        </div>
+      </div>
+    </section>
+    <aside class="details">
+      <div><h2>Detalle de ubicación</h2></div>
+      <div id="selectedCode" class="selected-code">SIN SELECCIÓN</div>
+      <div id="detailsContent" class="details-content"><div class="welcome"><div class="welcome-icon">▦</div><h3>Selecciona un espacio</h3><p>Haz clic en una ubicación o utiliza el buscador.</p></div></div>
+      <div class="summary"><h3>Resumen de bodega</h3><div class="stats"><div><strong id="totalSlots">0</strong><span>Ubicaciones</span></div><div><strong id="occupiedSlots">0</strong><span>Ocupadas</span></div><div><strong id="emptySlots">0</strong><span>Vacías</span></div></div><div class="progress"><div id="occupancyBar"></div></div><p id="occupancyText">Ocupación: 0%</p></div>
+    </aside>
+  </main>
+  <footer class="footer">WAREMAP · Conectando con base de datos online</footer>
+</div>
+<script type="module" src="app.js"></script>
+</body>
+</html>

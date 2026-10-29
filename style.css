@@ -1,0 +1,168 @@
+:root{--bg:#0b1220;--panel:#111d30;--panel-light:#17263c;--border:#2a3c56;--text:#e9f0fa;--muted:#91a2ba;--blue:#3285ed;--green:#16a454;--yellow:#ffd15c;--orange:#f47714}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--text)}button,input{font:inherit}button{background:var(--panel-light);border:1px solid #3b5473;border-radius:8px;color:var(--text);padding:10px 14px;cursor:pointer}button:hover{border-color:#6bb5ff}button:focus-visible,.slot:focus-visible,.search-results button:focus-visible,input:focus-visible{outline:2px solid #60bcff;outline-offset:2px}.app{min-height:100vh;display:flex;flex-direction:column}.header{min-height:75px;padding:12px 26px;background:#101b2d;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}.brand{display:flex;align-items:center;gap:12px}.logo{width:45px;height:45px;display:grid;place-items:center;background:var(--blue);border-radius:11px;font-size:25px;font-weight:900}.brand h1{margin:0;font-size:24px;letter-spacing:2px}.brand h1 span{color:#6dafff}.brand p{margin:3px 0 0;color:var(--muted);font-size:10px;letter-spacing:1.3px}.header-status{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:8px}.dot{width:9px;height:9px;background:#27c681;border-radius:50%}.workspace{display:grid;grid-template-columns:minmax(0,2fr) minmax(300px,1fr);flex:1;min-height:0}.map-section{padding:21px;display:flex;flex-direction:column;gap:14px;min-width:0;min-height:750px}.toolbar{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}.toolbar h2,.details h2{margin:0 0 6px;font-size:19px}.toolbar p,.details p{margin:0;color:var(--muted);font-size:13px}.view-switch{display:flex;gap:7px}.view-switch .active{background:#21579a;border-color:#65a8f7;color:white}.search-area{background:#111d30;border:1px solid var(--border);border-radius:12px;padding:13px}.search-area label{display:block;margin-bottom:9px;font-weight:600;font-size:13px}.search-line{display:flex;gap:8px}.search-line input{min-width:0;flex:1;background:#0a1423;border:1px solid #3b5473;color:var(--text);border-radius:8px;padding:11px 13px}.search-status{margin-top:9px;color:var(--muted);font-size:12px}.search-results{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px;max-height:116px;overflow:auto}.search-results[hidden]{display:none}.search-results button{padding:7px 10px;font-size:12px;text-align:left}.search-results small{display:block;color:#a2bad8;margin-top:3px}.scene-wrapper{position:relative;flex:1;min-height:520px;background:#182536;border:1px solid var(--border);border-radius:14px;overflow:hidden}#scene3d{position:absolute;inset:0}#scene3d[hidden],#map2d[hidden]{display:none}#scene3d canvas{display:block;width:100%;height:100%}#map2d{position:absolute;inset:0;overflow:auto;background:#1e293b;padding:50px 28px 25px}.scene-label{position:absolute;top:12px;left:12px;padding:8px 11px;background:#0d213be8;border:1px solid #426889;border-radius:7px;font-size:10px;letter-spacing:1px;color:#a5d0ff;pointer-events:none}.scene-help{position:absolute;bottom:10px;left:10px;right:10px;text-align:center;font-size:11px;color:#abbdd1;pointer-events:none}.legend{display:flex;flex-wrap:wrap;gap:17px;color:var(--muted);font-size:12px}.legend div{display:flex;align-items:center;gap:7px}.swatch{width:12px;height:12px;border-radius:2px;display:inline-block}.full{background:#16a454}.vacant{border:2px solid #8398b1}.picked{background:var(--yellow)}.orange{background:var(--orange)}.wall{background:#d0a64d}.details{background:var(--panel);border-left:1px solid var(--border);padding:25px;display:flex;flex-direction:column;gap:19px}.selected-code{padding:15px;background:#172b46;border:1px solid #31527b;border-radius:9px;color:#91c5ff;font-size:20px;font-weight:800;text-align:center;overflow-wrap:anywhere}.details-content{min-height:220px}.welcome{text-align:center;padding:32px 10px}.welcome-icon{font-size:50px;color:#6185b3}.welcome h3{font-size:16px}.welcome p{line-height:1.5}.info-row{padding:15px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;gap:12px;font-size:14px}.info-row span{color:var(--muted)}.info-row strong{text-align:right;overflow-wrap:anywhere}.summary{margin-top:auto;background:#17263b;border:1px solid var(--border);border-radius:11px;padding:17px}.summary h3{font-size:15px;margin:0 0 18px}.stats{display:grid;grid-template-columns:repeat(3,1fr);text-align:center;gap:8px}.stats strong{display:block;font-size:24px}.stats span{font-size:11px;color:var(--muted)}.progress{height:8px;border-radius:6px;background:#34435a;overflow:hidden;margin:18px 0 9px}.progress div{height:100%;background:#23b774;width:0}.summary p{font-size:12px}.footer{border-top:1px solid var(--border);padding:13px;text-align:center;color:#8393aa;font-size:11px}
+/* Plano 2D basado en la referencia: dos pares y un rack final junto a la pared */
+.flat-layout{min-width:690px;max-width:1100px;margin:auto;padding:10px 0 18px}.flat-top{display:flex;justify-content:flex-end;align-items:center;gap:8px;color:#b8c8db;font-weight:700;margin-bottom:22px}.flat-block{display:grid;grid-template-columns:minmax(0,1fr) 65px minmax(0,1fr);align-items:stretch;gap:12px}.rack-card{background:#101827;border:1px solid #33435b;border-radius:15px;padding:18px 15px 16px;min-width:0}.rack-card h3{text-align:center;margin:0 0 17px;font-size:17px;letter-spacing:3px}.rack-header,.rack-row{display:grid;grid-template-columns:27px repeat(7,minmax(0,1fr));gap:5px;align-items:center}.rack-header{margin-bottom:6px}.rack-header span{text-align:center;font-size:10px;color:#7390bb}.rack-row{margin-bottom:5px}.level-label{font-size:11px;color:#7f9bbf;text-align:center;font-weight:700}.slot{aspect-ratio:0.91;min-width:0;border:2px solid #657991;border-radius:6px;background:transparent;color:#8aa1c2;font-weight:700;font-size:12px;cursor:pointer;padding:0;transition:border-color .12s,background .12s}.slot.occupied{background:#159d4e;border-color:#2cc66c;color:white}.slot.selected{outline:3px solid #53baff;outline-offset:2px;border-color:#d7efff}.slot.match{box-shadow:inset 0 0 0 3px #ffd15c}.slot.dim{opacity:.25}.aisle-vertical{display:grid;place-items:center;writing-mode:vertical-rl;transform:rotate(180deg);text-transform:uppercase;letter-spacing:5px;color:#8096b5;font-size:11px;font-weight:700}.aisle-horizontal{text-align:center;display:grid;place-items:center;min-height:84px;color:#94a8c7;letter-spacing:4px;text-transform:uppercase;font-size:12px;font-weight:700}.bottom-rack{width:calc((100% - 89px)/2);margin:0 auto 0 0}.rear-wall{height:13px;border-radius:3px;background:#d0a64d;margin-top:0;position:relative}.rear-wall:after{content:'PARED · SIN PASILLO INFERIOR';display:block;text-align:center;color:#efd992;font-size:10px;letter-spacing:1px;position:absolute;top:17px;width:100%}
+@media(max-width:1050px){.workspace{grid-template-columns:1fr}.map-section{min-height:740px}.details{border-left:0;border-top:1px solid var(--border)}.summary{margin-top:10px}}@media(max-width:580px){.header{padding:10px 13px}.header-status{display:none}.map-section{padding:11px}.view-switch{width:100%}.view-switch button{flex:1}.scene-wrapper{min-height:490px}.details{padding:17px}#map2d{padding:55px 15px 24px}}
+
+/* WAREMAP: identidad visual IPChile / Gourmet */
+:root{--gourmet-red:#c82132;--gourmet-red-dark:#871525}
+.header{min-height:108px;padding:12px 24px;border-bottom:5px solid var(--gourmet-red);background:linear-gradient(110deg,#0e1829,#172840 68%,#431e2b)}
+.brand{min-width:0;gap:15px}
+.brand-icon{height:70px;width:70px;object-fit:contain;flex-shrink:0}
+.brand-title{height:auto;width:min(490px,48vw);max-height:72px;object-fit:contain;object-position:left center;display:block}
+.header-status{white-space:nowrap}
+.footer{border-top:3px solid var(--gourmet-red)}
+.view-switch .active{background:var(--gourmet-red-dark);border-color:#f46471}
+.view-switch .active:hover{background:var(--gourmet-red)}
+.search-area{border-top:3px solid var(--gourmet-red)}
+.details{border-top:3px solid var(--gourmet-red)}
+/* Distribución 2D: cinco racks horizontales en una columna, como el plano original */
+#map2d{background:#18263a;padding:48px 22px 22px}
+.warehouse-plan{min-width:420px;max-width:880px;margin:0 auto;background:#fff6a6;border:10px solid #d0a64d;border-radius:4px;padding:10px 5px 0;color:#61521e}
+.warehouse-entrance{text-align:right;padding-right:14px;font-size:15px;font-weight:850;color:#2d2916}
+.warehouse-aisle{height:68px;display:flex;align-items:center;justify-content:center;text-transform:uppercase;letter-spacing:2.5px;font-size:12px;font-weight:800;color:#86682a}
+.warehouse-plan>.warehouse-aisle{height:30px}
+.warehouse-inner{display:grid;grid-template-columns:30px minmax(0,1fr) 30px;gap:4px}
+.warehouse-side{writing-mode:vertical-rl;display:flex;align-items:center;justify-content:center;letter-spacing:3px;font-size:12px;font-weight:800}
+.side-left{transform:rotate(180deg)}
+.warehouse-racks{display:flex;flex-direction:column;gap:0;min-width:0}
+.warehouse-rack{background:#111a2b;border:7px solid #f47714;border-radius:3px;padding:12px 17px 14px;box-shadow:none}
+.warehouse-rack h3{font-size:15px;margin:0 0 10px;letter-spacing:2px}
+.warehouse-rack .rack-row{margin-bottom:4px}
+.warehouse-rack .slot{aspect-ratio:auto;min-height:31px;font-size:12px}
+.warehouse-racks .warehouse-aisle{height:82px}
+.warehouse-wall-label{text-align:center;height:20px;font-size:10px;font-weight:800;padding-top:3px;letter-spacing:1px}
+.rack-against-wall{margin-bottom:0}
+@media(max-width:650px){.header{min-height:82px;padding:10px}.brand{gap:7px}.brand-icon{width:48px;height:48px}.brand-title{width:min(310px,70vw);max-height:55px}.warehouse-plan{min-width:410px}.warehouse-inner{grid-template-columns:23px minmax(0,1fr) 23px}.warehouse-rack{padding:10px 6px;border-width:5px}.warehouse-rack .rack-header,.warehouse-rack .rack-row{gap:3px;grid-template-columns:24px repeat(7,minmax(0,1fr))}}
+
+/* V6: identidad Gourmet blanca y roja. Paneles adaptados a una sola pantalla. */
+:root{--bg:#f3f5f8;--panel:#fff;--panel-light:#fff5f5;--border:#dfe3e9;--text:#232935;--muted:#697384;--blue:#bf2034;--gourmet-red:#c71932;--gourmet-red-dark:#a21027;--yellow:#f9c84d}
+html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text)}
+.app{height:100dvh;min-height:0;overflow:hidden}
+.header{height:76px;min-height:76px;flex-shrink:0;background:#fff;border-bottom:5px solid var(--gourmet-red);padding:7px 20px;box-shadow:0 2px 12px #24304712}
+.brand-icon{width:56px;height:56px}.brand-title{width:min(405px,44vw);max-height:57px}
+.header-status{color:#576171}.dot{background:#1aa15e}
+.workspace{height:calc(100dvh - 76px);min-height:0;overflow:hidden;grid-template-columns:minmax(0,2fr) minmax(290px,1fr)}
+.map-section{padding:12px 14px 10px;min-height:0;height:100%;gap:9px;overflow:hidden}
+.toolbar{min-height:43px;flex-shrink:0;flex-wrap:nowrap}.toolbar h2,.details h2{font-size:17px;margin-bottom:3px}.toolbar p,.details p{font-size:11px}
+.view-switch{flex-shrink:0}.view-switch button{padding:8px 12px}
+button{background:#fff;border:1px solid #d3d9e2;color:#333b49}
+button:hover{border-color:var(--gourmet-red);background:#fff4f5}
+button:focus-visible,.slot:focus-visible,.search-results button:focus-visible,input:focus-visible{outline:2px solid var(--gourmet-red)}
+.view-switch .active{background:var(--gourmet-red);border-color:var(--gourmet-red);color:#fff}
+.view-switch .active:hover{background:#a9102a}
+.search-area{position:relative;flex-shrink:0;background:#fff;border:1px solid var(--border);border-top:3px solid var(--gourmet-red);padding:8px 10px;border-radius:9px}
+.search-area label{margin-bottom:4px;font-size:12px}.search-line input{padding:7px 10px;border-color:#d0d7df;background:#fff;color:var(--text);font-size:12px}
+.search-line button{padding:7px 10px;font-size:12px}.search-status{margin-top:4px;font-size:10px}
+.search-results{position:absolute;z-index:30;top:100%;left:7px;right:7px;background:#fff;border:1px solid #d1d9e2;border-radius:8px;box-shadow:0 10px 24px #0002;padding:8px;max-height:min(240px,40vh);overflow-y:auto}
+.search-results small{color:#677788}
+.scene-wrapper{min-height:0;flex:1;background:#f7f4e7;border-color:#d6dbe2;border-radius:10px}
+.scene-label{background:#fffdf3ed;color:#a71830;border-color:#edd6d8}
+.scene-help{background:#ffffffc4;border-radius:4px;color:#445063;width:max-content;max-width:90%;margin:auto;padding:3px 9px}
+.legend{min-height:18px;flex-shrink:0;gap:12px;font-size:11px;color:#525d6b}
+.details{height:100%;min-height:0;overflow:hidden;background:#fff;border-top:0;border-left:1px solid #dfe3e9;padding:15px 17px 12px;gap:12px}
+.selected-code{padding:11px;background:#fff2f3;border-color:#e9bec4;color:#b51b34;font-size:17px}
+.details-content{min-height:0;overflow-y:auto;flex:1}.welcome{padding:15px 8px}.welcome-icon{font-size:37px;color:#d56a79}.welcome h3{margin:8px 0}.welcome p{font-size:12px}
+.info-row{padding:10px 0;border-color:#eceff2;font-size:12px}.info-row span{color:#637080}
+.summary{flex-shrink:0;margin-top:auto;background:#fff9f9;border:1px solid #eadce0;border-radius:9px;padding:10px}.summary h3{font-size:12px;margin-bottom:9px}.stats strong{font-size:20px}.stats span{font-size:10px}.progress{margin:10px 0 4px;background:#eedde0}.progress div{background:var(--gourmet-red)}.summary p{font-size:10px}
+.footer{display:none}
+#map2d{background:#fffdf7;padding:8px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+#map2d[hidden]{display:none}
+.warehouse-plan{width:740px;min-width:740px;max-width:none;margin:0;flex:none;transform-origin:center center;border-width:8px;background:#fff4b0;color:#665020;}
+.warehouse-entrance{font-size:13px;padding-right:12px}.warehouse-plan>.warehouse-aisle{height:24px}
+.warehouse-inner{grid-template-columns:32px minmax(0,1fr) 32px}
+.warehouse-rack{padding:6px 12px 7px;border-width:5px}
+.warehouse-rack h3{font-size:12px;margin:0 0 5px}
+.warehouse-rack .rack-header{margin-bottom:3px}.warehouse-rack .rack-header span{font-size:9px}
+.warehouse-rack .rack-row{margin-bottom:3px;gap:5px}
+.warehouse-rack .slot{height:23px;min-height:23px;font-size:10px;border-radius:4px}
+.warehouse-racks .warehouse-aisle{height:37px}
+.warehouse-side{font-size:10px}.warehouse-wall-label{height:13px;font-size:9px}
+@media(max-width:1050px){.workspace{grid-template-columns:minmax(0,1.65fr) minmax(270px,1fr)}.map-section{min-height:0}.details{border-top:0;border-left:1px solid var(--border)}.summary{margin-top:auto}}
+@media(max-width:680px){.header{height:60px;min-height:60px;padding:5px 9px}.brand-icon{height:44px;width:44px}.brand-title{width:min(260px,62vw);max-height:45px}.header-status{display:none}.workspace{height:calc(100dvh - 60px);grid-template-columns:minmax(0,1fr) minmax(160px,0.6fr)}.map-section{padding:6px;gap:5px}.toolbar{flex-wrap:wrap;gap:5px}.toolbar h2{font-size:13px}.toolbar p{font-size:9px}.view-switch button{font-size:10px;padding:5px 6px}.search-area{padding:5px}.search-area label{font-size:10px}.search-status{display:none}.details{padding:7px;gap:7px}.details h2{font-size:12px}.details p{font-size:10px}.selected-code{font-size:12px;padding:7px}.summary{padding:6px}.stats strong{font-size:15px}.stats span{font-size:8px}.legend{font-size:9px;gap:5px}}
+@media(max-height:660px){.header{height:58px;min-height:58px}.brand-icon{height:43px;width:43px}.brand-title{max-height:43px}.workspace{height:calc(100dvh - 58px)}.toolbar p,.details>div:first-child p{display:none}.search-area{padding:5px}.search-area label{margin-bottom:2px}.search-status{display:none}.summary{padding:7px}.summary h3{margin-bottom:4px}}
+
+/* Productos múltiples y coincidencias visibles en el mapa plano */
+.product-detail{margin:9px 0 13px;border:1px solid #eed9dd;border-left:4px solid #b61d33;border-radius:8px;padding:7px 11px;background:#fffafa}
+.product-detail h3{font-size:12px;margin:0 0 3px;color:#a51f34}
+.product-detail .info-row{padding:7px 0;font-size:12px}
+.slot.match{box-shadow:inset 0 0 0 3px #ffc400,0 0 0 2px #ffc400!important;opacity:1}
+.slot.selected{outline:3px solid #e14154;outline-offset:1px}
+.details-content{scrollbar-width:thin}
+
+/* V8 - Navegación en el encabezado y mayor espacio para mapa */
+.header-actions{display:flex;align-items:center;gap:20px;flex-shrink:0}
+.header-actions .view-switch{display:flex;gap:7px}
+.header-actions .view-switch button{padding:8px 13px;font-size:12px;font-weight:600;white-space:nowrap}
+.header .brand-title{filter:none;max-height:51px;width:min(395px,37vw);object-fit:contain}
+.header .brand-icon{width:51px;height:51px}
+.toolbar{min-height:38px}
+.scene-help:empty{display:none}
+.details>div:first-child p{display:none}
+@media(max-width:900px){.header{gap:10px;padding-left:11px;padding-right:11px}.header-actions{gap:7px}.header-actions .view-switch button{padding:7px 8px;font-size:11px}.header .brand-title{width:min(285px,34vw)}.header-status{font-size:10px}}
+@media(max-width:680px){.header .brand-title{width:min(180px,33vw);max-height:37px}.header .brand-icon{width:37px;height:37px}.header-actions .view-switch{gap:3px}.header-actions .view-switch button{font-size:9px;padding:5px 4px}.header-actions .header-status{display:none}}
+
+/* V9: prioridad visual al plano 2D, sin perder panel de detalle */
+@media (min-width:1051px){
+  .workspace{grid-template-columns:minmax(0,2.7fr) minmax(305px,1fr)}
+}
+.map-section{padding:8px 10px 7px;gap:6px}
+.toolbar{min-height:32px}
+.search-area{padding:8px 10px}
+.legend{gap:10px;font-size:11px}
+#map2d{padding:4px}
+.warehouse-plan{width:740px}
+.warehouse-racks .warehouse-aisle{height:28px}
+.warehouse-plan>.warehouse-aisle{height:17px}
+.warehouse-rack{padding:5px 12px 5px}
+.warehouse-rack .slot{height:23px;min-height:23px}
+.selected-code{font-size:clamp(12px,1.3vw,18px);line-height:1.3;white-space:normal;padding:12px 8px}
+
+/* V10: controles de zoom 2D y mapa sin leyendas superfluas */
+#zoom2dControls[hidden]{display:none}
+.zoom2d-controls{position:absolute;right:13px;bottom:13px;z-index:25;display:flex;align-items:center;gap:5px;padding:5px;background:#fffffff2;border:1px solid #dfd6c6;border-radius:9px;box-shadow:0 3px 14px #0002}
+.zoom2d-controls button{min-width:30px;height:30px;padding:4px 8px;background:white;color:#9c182b;border:1px solid #dfd7d7;border-radius:6px;font-size:17px;font-weight:700}
+.zoom2d-controls #zoom2dReset{font-size:11px;font-weight:600}
+.zoom2d-controls span{min-width:43px;text-align:center;font-size:11px;color:#5b4141;font-weight:700}
+#map2d{touch-action:pan-x pan-y}
+
+/* V11: racks 2D más claros y desplazamiento manual sobre espacios libres. */
+.warehouse-rack{background:#435872;border-color:#ed7628;color:#ffffff}
+.warehouse-rack h3{color:#ffffff}
+.warehouse-rack .rack-header span,.warehouse-rack .level-label{color:#e0e9f2}
+.warehouse-rack .slot:not(.occupied){border-color:#b9c8d9;color:#f5f8fc;background:#435872}
+.warehouse-rack .slot.occupied{background:#169f52;border-color:#07512a;color:#ffffff}
+#map2d{cursor:grab;touch-action:none;user-select:none}
+#map2d.arrastrando{cursor:grabbing}
+#map2d .slot{cursor:pointer;touch-action:manipulation}
+#map2d .warehouse-plan{will-change:transform}
+
+/* V12: paleta 2D cálida y consistente con Gourmet */
+#map2d{background:#f8f4ef}
+.warehouse-plan{background:#fbf0d9;border-color:#e4be90;color:#604b39}
+.warehouse-rack{background:#f4e6da;border-color:#da874f;color:#533729}
+.warehouse-rack h3{color:#653a28}
+.warehouse-rack .rack-header span,.warehouse-rack .level-label{color:#795948}
+.warehouse-rack .slot:not(.occupied){background:#fffcf7;border-color:#d5bda8;color:#735a48}
+.warehouse-rack .slot.occupied{background:#42BE73;border-color:#064625;color:#13482b;font-weight:700}
+.warehouse-side,.warehouse-aisle,.warehouse-entrance{color:#885d42}
+.warehouse-rack .slot.match{box-shadow:inset 0 0 0 3px #e5ad20,0 0 0 2px #e5ad20!important}
+.product-detail{background:#fffaf8;border-color:#ead7d1;border-left-color:#c71932}
+
+
+/* V15: salida a exclusa en el extremo opuesto a la entrada */
+.warehouse-plan{position:relative;padding-bottom:34px}
+.warehouse-exit{position:absolute;right:10px;bottom:6px;padding:3px 9px;border-radius:6px;background:#8fbca1;color:#ffffff;font-size:10px;font-weight:800;letter-spacing:.35px;box-shadow:0 2px 8px #0001;max-width:132px;text-align:center;line-height:1.15}
+@media(max-width:680px){.warehouse-exit{font-size:8px;padding:3px 6px;right:6px;bottom:5px;max-width:108px}}
+
+/* V15.2: selección 2D consistente con la leyenda amarilla */
+:root { --color-seleccion-2d: #f9c84d; }
+.legend .swatch.picked { background: var(--color-seleccion-2d); }
+#map2d .slot.selected,
+#map2d .warehouse-rack .slot.selected {
+  outline: 4px solid var(--color-seleccion-2d);
+  outline-offset: 1px;
+  border-color: var(--color-seleccion-2d);
+}
+
+/* V23: barra de leyenda retirada; mapa aprovecha el espacio liberado. */
