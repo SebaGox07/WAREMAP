@@ -1,4 +1,5 @@
-WAREMAP — Visualización de racks de bodega
+WAREMAP — Visualización de racks de bodega.
+
 Proyecto de título | Ingeniería en Informática | IPCHILE
 
 Aplicación online: https://sebagox07.github.io/WAREMAP/
