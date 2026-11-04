@@ -27,6 +27,7 @@ Tecnologías
 - GitHub Pages para publicar la aplicación.
 No requiere un servidor propio para ejecutar el frontend.
 Estructura de archivos
+
 WAREMAP/
 ├── index.html             # Interfaz principal
 ├── style.css              # Estilos
