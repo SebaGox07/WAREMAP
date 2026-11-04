@@ -1,62 +1,231 @@
-WAREMAP — Visualización de racks de bodega.
 
-Proyecto de título | Ingeniería en Informática | IPCHILE
+# 🏭 WAREMAP — Visualización de Racks de Bodega
 
-Aplicación online: https://sebagox07.github.io/WAREMAP/
-Descripción
-WAREMAP es una aplicación web desarrollada como prototipo funcional a partir de una necesidad observada durante una práctica profesional en la empresa Gourmet. Después de la migración desde un sistema WMS hacia Microsoft Dynamics 365, se dejó de contar con una representación visual básica de los racks de la bodega.
+**Proyecto de Título | Ingeniería en Informática | IPCHILE**
 
-La propuesta busca facilitar la consulta de ubicaciones y productos mediante un mapa interactivo, sin reemplazar el sistema de gestión de inventario de la empresa. La versión actual utiliza datos de demostración almacenados en Supabase y no está integrada directamente con Microsoft Dynamics 365. Esa integración se considera una mejora futura.
-Funcionalidades
-- Visualización de la bodega en 3D, con racks y elementos representativos del almacenamiento.
-- Vista alternativa en 2D, con acercamiento, alejamiento y desplazamiento.
-- Identificación visual de ubicaciones ocupadas y vacías.
-- Selección de ubicaciones para consultar rack, nivel, posición y productos asociados.
-- Búsqueda por código de ubicación, SKU o nombre de producto.
-- Consulta de cantidades y unidades de medida de los productos.
-- Lectura de información desde Supabase mediante API REST, con actualización automática aproximadamente cada 15 segundos.
-- Funcionamiento de solo consulta: esta aplicación no modifica el inventario.
-Estructura de la bodega
-El prototipo representa 5 racks, cada uno con 3 niveles y 7 posiciones por nivel, para un total de 105 ubicaciones. Los códigos siguen un formato como R02-N1-P05 (rack 02, nivel 1, posición 05).
+🌐 **[Ver aplicación WAREMAP Online](https://sebagox07.github.io/WAREMAP/)**
 
-Los tipos de representación utilizados incluyen ubicaciones vacías, big bags, rollos de etiquetas y rollos de sachet/film.
-Tecnologías
-- HTML, CSS y JavaScript.
-- Three.js para la visualización tridimensional.
-- Supabase (PostgreSQL y API REST) como fuente de datos.
-- GitHub Pages para publicar la aplicación.
-No requiere un servidor propio para ejecutar el frontend.
-Estructura de archivos
+---
 
+## 📖 Descripción del proyecto
+
+**WAREMAP** es una aplicación web desarrollada como prototipo funcional a partir de una necesidad identificada durante una práctica profesional en la empresa **Gourmet**.
+
+Anteriormente, la empresa utilizaba un sistema WMS (*Warehouse Management System*) que contaba con una representación visual básica de los racks de almacenamiento. Después de la migración hacia **Microsoft Dynamics 365**, esta funcionalidad dejó de estar disponible.
+
+WAREMAP busca recuperar esta forma de consulta mediante un mapa interactivo que permite visualizar la distribución de los racks, identificar ubicaciones y consultar información de los productos almacenados.
+
+Actualmente, la aplicación utiliza **datos simulados almacenados en Supabase**. La integración directa con Microsoft Dynamics 365 se considera una mejora futura.
+
+---
+
+## 🎯 Objetivo
+
+Desarrollar una aplicación web que facilite la visualización y consulta de ubicaciones de almacenamiento, permitiendo identificar racks, niveles, posiciones y productos de manera gráfica y sencilla.
+
+La aplicación está orientada principalmente a:
+
+- Operarios de bodega.
+- Personal de abastecimiento.
+- Personal de logística.
+
+---
+
+## 🚀 Funcionalidades principales
+
+### 🌐 Visualización 3D
+
+- Representación tridimensional de los racks.
+- Visualización de elementos que representan productos almacenados.
+- Navegación por la representación de la bodega.
+- Selección interactiva de ubicaciones.
+
+### 🗺️ Visualización 2D
+
+- Mapa de racks en dos dimensiones.
+- Identificación de posiciones ocupadas y vacías.
+- Funciones de zoom y desplazamiento.
+- Selección de ubicaciones directamente desde el mapa.
+
+### 🔎 Sistema de búsqueda
+
+Permite buscar información utilizando:
+
+- Código de ubicación.
+- Código de producto o SKU.
+- Nombre del producto.
+
+El sistema identifica las coincidencias y permite localizar las posiciones correspondientes.
+
+### 📦 Detalle de ubicaciones
+
+Al seleccionar una ubicación, se muestra información como:
+
+- Rack.
+- Nivel.
+- Posición.
+- Código y nombre del producto.
+- Cantidad almacenada.
+- Unidad de medida.
+
+### 🔄 Actualización de información
+
+WAREMAP consulta los datos almacenados en Supabase mediante una API REST.
+
+La aplicación realiza actualizaciones automáticas aproximadamente cada **15 segundos**, permitiendo visualizar los cambios realizados desde WAREMAP ADMIN.
+
+**WAREMAP funciona exclusivamente como herramienta de consulta y no permite modificar el inventario.**
+
+---
+
+## 🏗️ Estructura de la bodega
+
+El prototipo representa una distribución de almacenamiento compuesta por:
+
+| Elemento | Cantidad |
+|---|---:|
+| Racks | 5 |
+| Niveles por rack | 3 |
+| Posiciones por nivel | 7 |
+| **Total de ubicaciones** | **105** |
+
+Las ubicaciones utilizan una nomenclatura como:
+
+`R02-N1-P05`
+
+Donde:
+
+- `R02`: Rack 02.
+- `N1`: Nivel 1.
+- `P05`: Posición 05.
+
+La representación contempla ubicaciones vacías, big bags, rollos de etiquetas y rollos de sachet o film.
+
+---
+
+## 💻 Tecnologías utilizadas
+
+| Tecnología | Función |
+|---|---|
+| HTML5 | Estructura de la aplicación |
+| CSS3 | Diseño de la interfaz |
+| JavaScript | Lógica y funcionalidades |
+| Three.js | Visualización tridimensional |
+| Supabase | Base de datos PostgreSQL |
+| API REST | Comunicación con la base de datos |
+| GitHub Pages | Publicación de la aplicación |
+
+La aplicación funciona desde el navegador y no requiere instalar software adicional para utilizarla.
+
+---
+
+## 📂 Estructura del proyecto
+
+```text
 WAREMAP/
-├── index.html             # Interfaz principal
-├── style.css              # Estilos
-├── app.js                 # Vistas, búsqueda y consulta a Supabase
-├── assets/                # Imágenes de identidad del proyecto
+│
+├── index.html
+├── style.css
+├── app.js
+│
+├── assets/
 │   ├── logo-waremap.png
 │   └── titulo-waremap.png
-├── supabase_setup.sql     # Estructura y datos iniciales de demostración
-├── .nojekyll              # Archivo de publicación en GitHub Pages
-└── README.md              # Documentación
-Cómo utilizar WAREMAP
-1. Ingresar a https://sebagox07.github.io/WAREMAP/.
-2. Seleccionar la vista 2D o 3D según la necesidad.
-3. Recorrer los racks o buscar una ubicación, SKU o producto.
-4. Seleccionar la ubicación para revisar su información.
-5. Si un administrador modifica los datos en WAREMAP ADMIN, esperar la siguiente actualización automática para ver los cambios.
-Configuración de una instalación nueva
-Estos pasos son solo para reproducir el prototipo en otro entorno. La versión publicada ya fue configurada y no necesita modificarse para su uso normal.
+│
+├── supabase_setup.sql
+├── .nojekyll
+└── README.md
+```
 
-1. Crear un proyecto en Supabase y ejecutar supabase_setup.sql desde SQL Editor para preparar la tabla public.ubicaciones con datos de demostración.
-2. Configurar en app.js los valores públicos de API_CONFIG: url y publishableKey.
-3. Publicar los archivos en la raíz de un repositorio de GitHub y activar Settings > Pages > Deploy from a branch > main > /(root).
-4. Comprobar que la aplicación cargue las 105 ubicaciones desde Supabase.
-Seguridad: utilizar únicamente la clave publicable/`anon` en el frontend. Nunca publicar contraseñas, service_role ni claves secretas. El SQL contempla lectura pública y políticas RLS; por eso no se debe cargar inventario real o confidencial en esta configuración de demostración.
-Relación con WAREMAP ADMIN
-WAREMAP comparte la base de datos Supabase con WAREMAP ADMIN, una aplicación separada que permite a usuarios administradores autorizados modificar la información de las ubicaciones. WAREMAP consulta esos cambios y los muestra en su siguiente actualización, pero no realiza escrituras.
+**Descripción de los archivos:**
 
-Aplicación administrativa: https://sebagox07.github.io/WAREMAP-ADMIN/
-Alcance del proyecto
-WAREMAP es un prototipo académico funcional orientado a visualización, búsqueda y consulta. No registra movimientos de bodega, no reemplaza un WMS y no modifica existencias en Microsoft Dynamics 365. La conexión directa con Dynamics 365, la validación con más usuarios y una eventual implementación operativa quedan como posibles etapas futuras.
-Estado
-La aplicación se encuentra publicada en GitHub Pages y su funcionamiento junto con WAREMAP ADMIN ha sido confirmado durante el desarrollo del proyecto. Los datos utilizados son de demostración.
+- `index.html`: estructura de la interfaz principal.
+- `style.css`: estilos visuales de la aplicación.
+- `app.js`: funcionamiento de las vistas, búsquedas y conexión con Supabase.
+- `assets/`: imágenes utilizadas en la interfaz.
+- `supabase_setup.sql`: estructura y datos iniciales de demostración.
+- `.nojekyll`: configuración de publicación para GitHub Pages.
+
+---
+
+## 🧭 Cómo utilizar WAREMAP
+
+1. Ingresar a **[WAREMAP Online](https://sebagox07.github.io/WAREMAP/)**.
+2. Seleccionar la vista 2D o 3D.
+3. Navegar por los racks o utilizar el buscador.
+4. Seleccionar una ubicación.
+5. Revisar la información de los productos almacenados.
+
+Los cambios realizados desde WAREMAP ADMIN se reflejan después de la siguiente actualización automática.
+
+---
+
+## ⚙️ Configuración para una instalación nueva
+
+> Esta sección es referencial. La versión publicada ya se encuentra configurada y funcionando.
+
+1. Crear un proyecto en Supabase.
+2. Ejecutar `supabase_setup.sql` desde el editor SQL para preparar las ubicaciones de demostración.
+3. Configurar la URL y la clave pública de Supabase en `app.js`.
+4. Publicar los archivos en un repositorio de GitHub.
+5. Activar GitHub Pages desde la rama `main` y la carpeta raíz.
+6. Verificar que las 105 ubicaciones se carguen correctamente.
+
+**Importante:** no publicar contraseñas ni claves secretas de Supabase. El frontend debe utilizar únicamente una clave pública y los permisos deben estar protegidos mediante políticas RLS.
+
+---
+
+## 🔗 Relación con WAREMAP ADMIN
+
+WAREMAP trabaja junto con una segunda aplicación denominada **WAREMAP ADMIN**.
+
+Ambas aplicaciones utilizan la misma base de datos Supabase.
+
+| WAREMAP Online | WAREMAP ADMIN |
+|---|---|
+| Visualización 2D y 3D | Mapa administrativo 2D |
+| Consulta de productos | Edición de productos |
+| Búsqueda de ubicaciones | Administración de ubicaciones |
+| Acceso de consulta | Acceso administrativo autorizado |
+| No modifica datos | Guarda modificaciones en Supabase |
+
+🛠️ **[Abrir WAREMAP ADMIN](https://sebagox07.github.io/WAREMAP-ADMIN/)**
+
+---
+
+## 📌 Alcance y limitaciones
+
+WAREMAP es un **prototipo académico funcional**.
+
+Actualmente:
+
+- Permite visualizar y consultar ubicaciones.
+- Utiliza información simulada almacenada en Supabase.
+- No modifica existencias ni registra movimientos de inventario.
+- No reemplaza un sistema WMS o ERP.
+- No está conectado directamente con Microsoft Dynamics 365.
+
+La integración con Dynamics 365, las pruebas con más usuarios y una posible implementación operativa quedan consideradas como futuras mejoras.
+
+---
+
+## 📊 Estado del proyecto
+
+**Estado actual: Prototipo funcional publicado.**
+
+La aplicación se encuentra disponible mediante GitHub Pages y comparte información con WAREMAP ADMIN a través de Supabase.
+
+El desarrollo forma parte del proyecto de título de la carrera de **Ingeniería en Informática de IPCHILE**.
+
+---
+
+## 👨‍💻 Autor
+
+**Sebastián González**
+
+Proyecto de Título — Ingeniería en Informática  
+IPCHILE — Chile
+
+---
+
+*WAREMAP — Una forma visual de consultar y comprender las ubicaciones de almacenamiento.*
