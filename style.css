@@ -155,8 +155,8 @@ button:focus-visible,.slot:focus-visible,.search-results button:focus-visible,in
 .warehouse-exit{position:absolute;right:10px;bottom:6px;padding:3px 9px;border-radius:6px;background:#8fbca1;color:#ffffff;font-size:10px;font-weight:800;letter-spacing:.35px;box-shadow:0 2px 8px #0001;max-width:132px;text-align:center;line-height:1.15}
 @media(max-width:680px){.warehouse-exit{font-size:8px;padding:3px 6px;right:6px;bottom:5px;max-width:108px}}
 
-/* V15.2: selección 2D consistente con la leyenda amarilla */
-:root { --color-seleccion-2d: #f9c84d; }
+/* Selección 2D verde; las coincidencias solo aparecen en el buscador. */
+:root { --color-seleccion-2d: #16a454; }
 .legend .swatch.picked { background: var(--color-seleccion-2d); }
 #map2d .slot.selected,
 #map2d .warehouse-rack .slot.selected {
@@ -166,10 +166,3 @@ button:focus-visible,.slot:focus-visible,.search-results button:focus-visible,in
 }
 
 /* V23: barra de leyenda retirada; mapa aprovecha el espacio liberado. */
-
-/* Ajuste solicitado: solo la ubicación seleccionada se destaca en verde. */
-#map2d .slot.selected,
-#map2d .warehouse-rack .slot.selected {
-  outline: 4px solid #16a454;
-  border-color: #16a454;
-}
