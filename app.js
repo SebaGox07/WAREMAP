@@ -34,7 +34,7 @@ const COLOR = {
   naranjaOscuro: 0xb74a08,
   bandeja: 0xff9d3e,
   verde: 0x80e3a4,
-  seleccionado: 0xffdb45
+  seleccionado: 0x16a454
 };
 
 const catalogo = [
@@ -843,23 +843,12 @@ function limpiarMarcadoresBusqueda() {
   marcadoresBusqueda.length = 0;
 }
 function resaltarCoincidencias(encontrados, buscando) {
-  const codigos = new Set(encontrados.map(u => u.codigo));
-  document.querySelectorAll(".slot").forEach(b => {
-    const ok = codigos.has(b.dataset.codigo);
-    b.classList.toggle("dim", buscando && !ok);
-    b.classList.toggle("match", buscando && ok);
+  // La búsqueda conserva sus resultados sin dejar marcas amarillas en el mapa.
+  document.querySelectorAll(".slot.match, .slot.dim").forEach(celda => {
+    celda.classList.remove("match", "dim");
   });
-  actualizarTransparenciaBusqueda3D(codigos, buscando);
+  actualizarTransparenciaBusqueda3D(new Set(), false);
   limpiarMarcadoresBusqueda();
-  if (!buscando) return;
-  for (const hitbox of blancos) {
-    if (!codigos.has(hitbox.userData.codigo)) continue;
-    const linea = new THREE.LineSegments(bordesBusqueda, materialBusqueda);
-    linea.position.copy(hitbox.position);
-    linea.renderOrder = 22;
-    hitbox.parent.add(linea);
-    marcadoresBusqueda.push(linea);
-  }
 }
 function actualizarBusqueda() {
   const q = buscador.value.trim();
@@ -871,7 +860,7 @@ function actualizarBusqueda() {
     estadoBusqueda.textContent = "Busca por producto, SKU, posición, rack o nivel.";
     return;
   }
-  estadoBusqueda.textContent = `${encontrados.length} ubicaciones encontradas; resaltadas en amarillo en ambas vistas.`;
+  estadoBusqueda.textContent = `${encontrados.length} ubicaciones encontradas.`;
   for (const u of encontrados.slice(0, 30)) {
     const boton = document.createElement("button");
     boton.type = "button";
@@ -929,7 +918,7 @@ actualizarVistaDatos(ubicaciones.map(u => ({codigo:u.codigo, tipo3d:"vacio", pro
 
 
 // WAREMAP - API REST de Supabase (consulta solamente)
-const API_CONFIG = {url: "https://sojbbddtapskbpzrwdpw.supabase.co", publishableKey: "sb_publishable_fbJ11a4FTt6VMbcDnr0mGw_smq0Lq5m"};
+const API_CONFIG = {url: "REEMPLAZAR_URL_SUPABASE", publishableKey: "REEMPLAZAR_CLAVE_PUBLICABLE"};
 const API_INTERVALO_MS = 15000;
 const estadoConexion = document.querySelector(".header-status");
 const piePagina = document.querySelector(".footer");

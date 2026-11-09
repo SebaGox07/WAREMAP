@@ -166,3 +166,10 @@ button:focus-visible,.slot:focus-visible,.search-results button:focus-visible,in
 }
 
 /* V23: barra de leyenda retirada; mapa aprovecha el espacio liberado. */
+
+/* Ajuste solicitado: solo la ubicación seleccionada se destaca en verde. */
+#map2d .slot.selected,
+#map2d .warehouse-rack .slot.selected {
+  outline: 4px solid #16a454;
+  border-color: #16a454;
+}
