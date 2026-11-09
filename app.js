@@ -918,7 +918,7 @@ actualizarVistaDatos(ubicaciones.map(u => ({codigo:u.codigo, tipo3d:"vacio", pro
 
 
 // WAREMAP - API REST de Supabase (consulta solamente)
-const API_CONFIG = {url: "REEMPLAZAR_URL_SUPABASE", publishableKey: "REEMPLAZAR_CLAVE_PUBLICABLE"};
+const API_CONFIG = {url: "https://sojbbddtapskbpzrwdpw.supabase.co", publishableKey: "sb_publishable_fbJ11a4FTt6VMbcDnr0mGw_smq0Lq5m"};
 const API_INTERVALO_MS = 15000;
 const estadoConexion = document.querySelector(".header-status");
 const piePagina = document.querySelector(".footer");
