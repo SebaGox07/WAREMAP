@@ -843,9 +843,9 @@ function limpiarMarcadoresBusqueda() {
   marcadoresBusqueda.length = 0;
 }
 function resaltarCoincidencias(encontrados, buscando) {
-  // La búsqueda conserva sus resultados sin dejar marcas amarillas en el mapa.
-  document.querySelectorAll(".slot.match, .slot.dim").forEach(celda => {
-    celda.classList.remove("match", "dim");
+  // Mantener las coincidencias solo en el listado, sin marcas amarillas en el mapa.
+  document.querySelectorAll(".slot.match, .slot.dim").forEach(b => {
+    b.classList.remove("match", "dim");
   });
   actualizarTransparenciaBusqueda3D(new Set(), false);
   limpiarMarcadoresBusqueda();
