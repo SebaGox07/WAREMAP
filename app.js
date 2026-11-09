@@ -34,7 +34,7 @@ const COLOR = {
   naranjaOscuro: 0xb74a08,
   bandeja: 0xff9d3e,
   verde: 0x80e3a4,
-  seleccionado: 0x16a454
+  seleccionado: 0x22c55e
 };
 
 const catalogo = [
@@ -480,7 +480,7 @@ function actualizarTransparenciaBusqueda3D(codigosCoincidentes, buscando) {
   const hayBusquedaActiva = buscando && codigosCoincidentes.size > 0;
   visuales3d.forEach((grupo, codigo) => {
     if (!grupo) return;
-    const opacidad = !hayBusquedaActiva ? 1 : (codigosCoincidentes.has(codigo) ? 1 : 0.20);
+    const opacidad = !hayBusquedaActiva ? 1 : (codigosCoincidentes.has(codigo) || seleccionActual?.codigo === codigo ? 1 : 0.20);
     aplicarOpacidadGrupo(grupo, opacidad);
   });
 }
@@ -644,7 +644,14 @@ function seleccionar(codigo) {
   hitbox.parent.add(marcador);
   document.querySelectorAll(".slot.selected").forEach(el => el.classList.remove("selected"));
   const celda2d = document.querySelector(`.slot[data-codigo="${codigo}"]`);
-  if (celda2d) celda2d.classList.add("selected");
+  if (celda2d) {
+    celda2d.classList.add("selected");
+    celda2d.classList.remove("dim");
+  }
+  if (buscador?.value.trim()) {
+    const q = buscador.value.trim();
+    actualizarTransparenciaBusqueda3D(new Set(ubicaciones.filter(u => coincide(u, q)).map(u => u.codigo)), true);
+  }
 }
 
 function resumen() {
@@ -843,12 +850,15 @@ function limpiarMarcadoresBusqueda() {
   marcadoresBusqueda.length = 0;
 }
 function resaltarCoincidencias(encontrados, buscando) {
-  // Mantener las coincidencias solo en el listado, sin marcas amarillas en el mapa.
-  document.querySelectorAll(".slot.match, .slot.dim").forEach(b => {
-    b.classList.remove("match", "dim");
+  const codigos = new Set(encontrados.map(u => u.codigo));
+  document.querySelectorAll(".slot").forEach(b => {
+    const ok = codigos.has(b.dataset.codigo);
+    b.classList.toggle("dim", buscando && !ok && b.dataset.codigo !== seleccionActual?.codigo);
+    b.classList.remove("match");
   });
-  actualizarTransparenciaBusqueda3D(new Set(), false);
+  actualizarTransparenciaBusqueda3D(codigos, buscando);
   limpiarMarcadoresBusqueda();
+  // Sin contornos amarillos para coincidencias; solo se conserva la selección verde.
 }
 function actualizarBusqueda() {
   const q = buscador.value.trim();
@@ -918,7 +928,8 @@ actualizarVistaDatos(ubicaciones.map(u => ({codigo:u.codigo, tipo3d:"vacio", pro
 
 
 // WAREMAP - API REST de Supabase (consulta solamente)
-const API_CONFIG = {url: "https://sojbbddtapskbpzrwdpw.supabase.co", publishableKey: "sb_publishable_fbJ11a4FTt6VMbcDnr0mGw_smq0Lq5m"};
+const API_CONFIG = {  url: "https://sojbbddtapskbpzrwdpw.supabase.co",
+  publishableKey: "sb_publishable_fbJ11a4FTt6VMbcDnr0mGw_smq0Lq5m"};
 const API_INTERVALO_MS = 15000;
 const estadoConexion = document.querySelector(".header-status");
 const piePagina = document.querySelector(".footer");
