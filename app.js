@@ -877,7 +877,7 @@ function actualizarBusqueda() {
     boton.textContent = u.codigo;
     const nombre = document.createElement("small");
     const relevantes = u.productos.filter(p => normalizar(`${p.sku} ${p.nombre}`).includes(normalizar(q)));
-    nombre.textContent = (relevantes.length ? relevantes : u.productos).map(p => p.nombre).join(" · ") || "Vacío";
+    nombre.textContent = (relevantes.length ? relevantes : u.productos).map(p => [p.sku, p.nombre].filter(Boolean).join(" — ")).join(" · ") || "Vacío";
     boton.append(nombre);
     boton.addEventListener("click", () => {
       seleccionar(u.codigo);
@@ -928,8 +928,7 @@ actualizarVistaDatos(ubicaciones.map(u => ({codigo:u.codigo, tipo3d:"vacio", pro
 
 
 // WAREMAP - API REST de Supabase (consulta solamente)
-const API_CONFIG = {  url: "https://sojbbddtapskbpzrwdpw.supabase.co",
-  publishableKey: "sb_publishable_fbJ11a4FTt6VMbcDnr0mGw_smq0Lq5m"};
+const API_CONFIG = {url: "REEMPLAZAR_URL_SUPABASE", publishableKey: "REEMPLAZAR_CLAVE_PUBLICABLE"};
 const API_INTERVALO_MS = 15000;
 const estadoConexion = document.querySelector(".header-status");
 const piePagina = document.querySelector(".footer");
