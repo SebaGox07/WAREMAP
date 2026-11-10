@@ -877,7 +877,7 @@ function actualizarBusqueda() {
     boton.textContent = u.codigo;
     const nombre = document.createElement("small");
     const relevantes = u.productos.filter(p => normalizar(`${p.sku} ${p.nombre}`).includes(normalizar(q)));
-    nombre.textContent = (relevantes.length ? relevantes : u.productos).map(p => p.nombre).join(" · ") || "Vacío";
+    nombre.textContent = (relevantes.length ? relevantes : u.productos).map(p => [p.sku, p.nombre].filter(Boolean).join(" — ")).join(" · ") || "Vacío";
     boton.append(nombre);
     boton.addEventListener("click", () => {
       seleccionar(u.codigo);
